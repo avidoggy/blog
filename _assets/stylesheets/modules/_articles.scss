@@ -150,6 +150,9 @@
   blockquote {
     display: block;
     margin-bottom: 30px;
+    blockquote {
+      margin-bottom: 0px;
+    }
   }
   h2,
   h3,
