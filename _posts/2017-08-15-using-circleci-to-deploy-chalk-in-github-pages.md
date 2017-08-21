@@ -6,9 +6,10 @@ thumb_image: "documentation/sample-image.jpg"
 tags: [Web, Chalk, CircleCI, GitHubPages]
 ---
 
-> If I have any mistakes in grammar or words spelling, please point out or pull request.
+Any mistakes in grammar or words spelling, please point out by pull request.
 
 ---------
+<br/>
 
 ## Before starting
 
@@ -19,20 +20,19 @@ tags: [Web, Chalk, CircleCI, GitHubPages]
 - *[Github Pages](https://pages.github.com/)* is designed to host your personal, organization, or project pages directly from a GitHub repository.
 
 ----------
+<br/>
 
 ## Clone Chalk to local
 
-0. I suppose you had a Github account already. If not, please [SignUp](https://github.com/join?source=header-home)
+1. I suppose you had a Github account already. If not, please [SignUp](https://github.com/join?source=header-home)
 
-1. Clone https://github.com/nielsenramon/chalk
+2. Clone https://github.com/nielsenramon/chalk
 
-    ```
-    git clone https://github.com/nielsenramon/chalk.git my-blog
-    ```
+    `git clone https://github.com/nielsenramon/chalk.git my-blog`
 
-2. Following [Chalk Installation](https://github.com/nielsenramon/chalk#installation)
+3. Following [Chalk Installation](https://github.com/nielsenramon/chalk#installation)
 
-    ```
+    ```bash
     # Install Ruby and npm
     brew install ruby
     brew install npm
@@ -41,3 +41,9 @@ tags: [Web, Chalk, CircleCI, GitHubPages]
     cd my-blog
     bin/setup
     ```
+    
+    <p/>
+
+    If you meet `limxml2` error, try `xcode-select --install`
+
+4. 
