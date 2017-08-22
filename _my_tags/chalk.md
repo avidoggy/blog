@@ -1,4 +1,4 @@
 ---
-slug: Chalk
+slug: chalk
 name: Chalk
 ---

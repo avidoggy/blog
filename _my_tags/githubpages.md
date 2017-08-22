@@ -1,4 +1,4 @@
 ---
-slug: GitHubPages
+slug: githubpages
 name: Github Pages
 ---

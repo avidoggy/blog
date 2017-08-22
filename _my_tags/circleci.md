@@ -1,4 +1,4 @@
 ---
-slug: CircleCI
+slug: circleci
 name: Circle CI
 ---
