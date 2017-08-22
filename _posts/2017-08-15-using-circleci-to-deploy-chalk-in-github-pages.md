@@ -3,7 +3,7 @@ layout: post
 title: "Using CircleCI to deploy Chalk and be hosted on Github Pages"
 description: "This post will describe and step-by-step how to use CircleCI to deploy Chalk, which is a great blog template for Jekyll, and be hosted on Github Pages."
 thumb_image: "documentation/sample-image.jpg"
-tags: [web, Chalk, CircleCI, GitHubPages]
+tags: [web, chalk, circleci, githubpages]
 ---
 
 Any mistakes in grammar or words spelling, please point out by pull request.
