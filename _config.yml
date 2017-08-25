@@ -2,7 +2,7 @@
 
 name: BitCat
 paginate: 25
-url: # add your site url (format: https://example.com/)
+url: 'http://blog.bitcat.tw/' # add your site url (format: https://example.com/)
 blog_theme: light # light || dark
 
 # Optional settings
