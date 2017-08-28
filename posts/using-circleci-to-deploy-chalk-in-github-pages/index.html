@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>BitCat | Using CircleCI to deploy Chalk and be hosted on Github Pages</title>
+  <meta name="description" content="This post will describe and step-by-step how to use CircleCI to deploy Chalk, which is a great blog template for Jekyll, and be hosted on Github Pages.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Using CircleCI to deploy Chalk and be hosted on Github Pages">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://blog.bitcat.tw//posts/using-circleci-to-deploy-chalk-in-github-pages/">
+  <meta property="og:description" content="This post will describe and step-by-step how to use CircleCI to deploy Chalk, which is a great blog template for Jekyll, and be hosted on Github Pages.">
+  <meta property="og:site_name" content="BitCat">
+  <meta property="og:image" content="http://blog.bitcat.tw//assets/documentation/sample-image.jpg">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="http://blog.bitcat.tw//posts/using-circleci-to-deploy-chalk-in-github-pages/">
+  <meta name="twitter:title" content="Using CircleCI to deploy Chalk and be hosted on Github Pages">
+  <meta name="twitter:description" content="This post will describe and step-by-step how to use CircleCI to deploy Chalk, which is a great blog template for Jekyll, and be hosted on Github Pages.">
+  <meta name="twitter:image" content="http://blog.bitcat.tw//assets/documentation/sample-image.jpg">
+
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link href="http://blog.bitcat.tw//feed.xml" type="application/rss+xml" rel="alternate" title="BitCat Last 10 blog posts" />
+
+  
+
+  
+    <link rel="stylesheet" href="/assets/light.css">
+
+  
+</head>
+
+<body>
+  <main>
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        <nav class="header-nav appear">
+  <a href="/" class="header-logo" title="BitCat">BitCat</a>
+  <ul class="header-links">
+    
+      <li>
+        <a href="/about" title="About me">
+          <span class="icon icon-about"></span>
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
+          <span class="icon icon-rss"></span>
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+        <article class="article appear">
+          <header class="article-header">
+            <h1>Using CircleCI to deploy Chalk and be hosted on Github Pages</h1>
+            <p>This post will describe and step-by-step how to use CircleCI to deploy Chalk, which is a great blog template for Jekyll, and be hosted on Github Pages.</p>
+            <div class="article-list-footer">
+              <span class="article-list-date">
+                August 15, 2017
+              </span>
+              <span class="article-list-divider">-</span>
+              <span class="article-list-minutes">
+                
+                
+                  2 minute read
+                
+              </span>
+              <span class="article-list-divider">-</span>
+              <div class="article-list-tags">
+                
+                  <a href="/tag/web">web</a>
+                
+                  <a href="/tag/chalk">chalk</a>
+                
+                  <a href="/tag/circleci">circleci</a>
+                
+                  <a href="/tag/githubpages">githubpages</a>
+                
+                  <a href="/tag/english">english</a>
+                
+              </div>
+            </div>
+          </header>
+
+          <div class="article-content">
+            <p>Any mistakes in grammar or words spelling, please point out by pull request.</p>
+
+<hr />
+<p><br /></p>
+
+<h2 id="before-starting">Before starting</h2>
+
+<ul>
+  <li>
+    <p><em><a href="https://circleci.com/">CircleCI</a></em> provides a continuous integration and delivery platform to help software teams rapidly release code with confidence by automating the build, test, and deploy process.</p>
+  </li>
+  <li>
+    <p><em><a href="https://github.com/nielsenramon/chalk">Chalk</a></em> is a high quality, completely customizable, performant and 100% free blog template for Jekyll.</p>
+  </li>
+  <li>
+    <p><em><a href="https://pages.github.com/">Github Pages</a></em> is designed to host your personal, organization, or project pages directly from a GitHub repository.</p>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="clone-chalk-to-local">Clone Chalk to local</h2>
+
+<ol>
+  <li>
+    <p>I suppose you had a Github account already. If not, please <a href="https://github.com/join?source=header-home">SignUp</a></p>
+  </li>
+  <li>
+    <p>Fork from <a href="https://github.com/nielsenramon/chalk">nielsenramon/chalk</a> and Clone</p>
+
+    <p><code class="highlighter-rouge">git clone https://github.com/&lt;your-account&gt;/chalk.git my-blog</code></p>
+  </li>
+  <li>
+    <p>Following <a href="https://github.com/nielsenramon/chalk#installation">Chalk Installation</a></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><pre> <span class="c"># Install Ruby and npm</span>
+ brew install ruby
+ brew install npm
+    
+ <span class="c"># Setup your environment</span>
+ <span class="nb">cd </span>my-blog
+ bin/setup
+</pre></td></tr></tbody></table>
+</div>
+    </div>
+
+    <p />
+
+    <p>If you meets <code class="highlighter-rouge">limxml2</code> error, try <code class="highlighter-rouge">xcode-select --install</code></p>
+  </li>
+  <li>
+    <p>Configuring your blog</p>
+
+    <ul>
+      <li>Editing your blog’s name by <code class="highlighter-rouge">name</code> in <code class="highlighter-rouge">_config.yml</code></li>
+      <li>Adding GA Tracking-code by <code class="highlighter-rouge">ga_analytics</code> in <code class="highlighter-rouge">config.yml</code></li>
+      <li>Using your domain by adding your domain-name in <code class="highlighter-rouge">CNAME</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>Posting paper</p>
+
+    <p>Adding markdown file in <code class="highlighter-rouge">_posts/</code> and following this format <code class="highlighter-rouge">&lt;yyyy&gt;-&lt;MM&gt;-&lt;dd&gt;-&lt;title&gt;.md</code>.</p>
+
+    <p>For example:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre> touch _posts/2017-04-01-my-first-posting.md
+</pre></td></tr></tbody></table>
+</div>
+    </div>
+
+    <p />
+  </li>
+  <li>
+    <p>Adding tag</p>
+
+    <p>Adding markdown file in <code class="highlighter-rouge">_my_tags/</code>.</p>
+
+    <p>For example:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre> <span class="nb">echo</span> <span class="s2">"---
+ slug: aws
+ name: Amazon Web Service
+ ---"</span> &gt; _my_tags/aws.md
+</pre></td></tr></tbody></table>
+</div>
+    </div>
+
+    <p />
+  </li>
+  <li>
+    <p>Adding CirclCI</p>
+
+    <p>For Automated deployment with Circle CI, please following <a href="https://github.com/nielsenramon/kickster#automated-deployment-with-circle-ci">[Original Guide]</a></p>
+  </li>
+</ol>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Chalk is realy a GREAT Github-Page template for blog.</p>
+
+          </div>
+
+          <div class="article-share">
+            
+            
+            <a href="https://twitter.com/home?status=Using+CircleCI+to+deploy+Chalk+and+be+hosted+on+Github+Pages - http://blog.bitcat.tw//posts/using-circleci-to-deploy-chalk-in-github-pages/" title="Share on Twitter" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://blog.bitcat.tw//posts/using-circleci-to-deploy-chalk-in-github-pages/" title="Share on Facebook" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"/></svg>
+            </a>
+            <a href="https://plus.google.com/share?url=http://blog.bitcat.tw//posts/using-circleci-to-deploy-chalk-in-github-pages/" title="Share on Google+" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 128 128"><path d="M40.7 55.9v16.1c0 0 15.6 0 22 0C59.2 82.5 53.8 88.2 40.7 88.2c-13.3 0-23.7-10.8-23.7-24.2s10.4-24.2 23.7-24.2c7.1 0 11.6 2.5 15.8 5.9 3.3-3.3 3.1-3.8 11.6-11.9 -7.2-6.6-16.8-10.6-27.4-10.6C18.2 23.3 0 41.5 0 64c0 22.5 18.2 40.7 40.7 40.7 33.6 0 41.8-29.3 39-48.8H40.7zM113.9 56.7V42.6h-10.1v14.1H89.4v10.1h14.5v14.5h10.1V66.8H128V56.7H113.9z"/></svg>
+            </a>
+          </div>
+
+          
+        </article>
+        <footer class="footer appear">
+  <p align=center>
+    © BitCat/<a href="https://github.com/avidoggy/blog" target="_blank" title="avidoggy/blog">Blog</a>.
+    Template by
+    <a href="https://github.com/nielsenramon/chalk" target="_blank" title="Chalk">Chalk</a>.
+    Host by
+    <a href="https://pages.github.com/" target="_blank" title="Github Pages">Github Pages</a>.
+  </p>
+</footer>
+
+      </div>
+    </div>
+  </main>
+  
+  <script>
+    window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+    ga('create','UA-39411644-5','auto');ga('send','pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+
+
+<script src="/assets/vendor.js"></script>
+
+
+
+  <script src="/assets/webfonts.js"></script>
+
+
+
+
+  <script src="/assets/scrollappear.js"></script>
+
+
+
+<script src="/assets/application.js"></script>
+
+
+</body>
+</html>
